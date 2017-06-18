@@ -1,0 +1,30 @@
+<div class="profilepic">
+	{{ if $.Site.Params.email_md5 }}
+	<img src='http://www.gravatar.com/avatar/{{ $.Site.Params.email_md5 }}?s=100' alt="Profile Picture" style="width: 100px;" />
+	{{ else }}
+	{{ if $.Site.Author.email }}
+	<script src="{{ .Site.BaseURL }}/js/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5('{{ $.Site.Author.email | lower }}') + "?s=80' alt='Profile Picture' style='width: 80px;' />");
+		});
+	</script>
+	{{ end }}
+	{{ end }}
+</div>
+{{ partial "custom/header.html" . }}
+<nav id="main-nav">{{ partial "navigation.html" . }}</nav>
+<nav id="sub-nav">
+	<div class="social">
+		{{ if $.Site.Params.twitter_user }}
+			<a class="twitter" href='http://twitter.com/{{ $.Site.Params.twitter_user }}' title="Twitter">Twitter</a>
+		{{ end }}
+		{{ if $.Site.Params.github_user }}
+			<a class="github" href='https://github.com/{{ $.Site.Params.github_user }}' title="GitHub">GitHub</a>
+		{{ end }}
+    	{{ if $.Site.Params.subscribe_rss }}
+			<a class="rss" href='{{ $.Site.Params.subscribe_rss }}' title="RSS">RSS</a>
+		{{ end }}
+	</div>
+</nav>
+
